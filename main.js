@@ -6,6 +6,8 @@ leftWristX = 0;
 leftWristY = 0;
 
 scoreleftwrist=0;
+scoreleftwrist=0;
+
 
 song1_status="";
 song2_status="";
@@ -35,6 +37,8 @@ function gotPoses(results)
     {
     console.log(results)
     scoreleftwrist=results[0].pose.keypoints[9].score;
+    scorerightwrist=results[0].pose.keypoints[10].score;
+
    rightWristX = results[0].pose.rightWrist.x;
  rightWristY = results[0].pose.rightWrist.y;
   console.log("rightWristX = " + rightWristX +" rightWristY = "+ rightWristY);
@@ -61,6 +65,17 @@ function draw()
         {
             song2.play()
             document.getElementById("song").innerHTML="playing peter pan song ";
+        }
+         
+    }
+    if(scorerightwrist > 0.2)
+    {
+        circle(rightWristx,rightWristy,20);
+        song2.stop();
+        if(song1_status==false)
+        {
+            song1.play()
+            document.getElementById("song").innerHTML="playing harry potter theme song ";
         }
          
     }
